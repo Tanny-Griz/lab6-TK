@@ -1,5 +1,9 @@
 package week_6;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,16 +45,56 @@ public class Question_3_Read_Recycling_Report {
         // Don't modify the lines. Each element in the ArrayList is one line from the file.
         // Return the ArrayList.
         // Add exception handling to this method. Print an error message and return null if an exception is thrown.
-        
-       return null;  // TODO return your ArrayList of lines
+
+        // Create an ArrayList to store all lines from the file
+        List<String> lines = new ArrayList<>();
+
+        // Open the file and close it automatically
+        try (BufferedReader reader =
+                     new BufferedReader(new FileReader(filename))) {
+
+            String line;
+
+            // Read each line until the end of the file
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+            return null;
+        }
+
+        return lines;
     }
     
     
     public List<Integer> extractCrateQuantityData(List<String> lines) {
         //TODO extract the number of crates from each String,
         // convert to an integer, and save each integer in a new ArrayList
-        
-        return null;  // TODO return your ArrayList of crate quantities
+
+        // Create a new ArrayList to store crate quantities
+        List<Integer> crateQuantities = new ArrayList<>();
+
+        // Go through each line from the file
+        for (String line : lines) {
+
+            // Skip the total line if it exists
+            if (!line.startsWith("House ")) {
+                continue;
+            }
+
+            // Split the line into separate words
+            String[] parts = line.split("\\s+");
+
+            // Convert the crate quantity from String to int
+            int crates = Integer.parseInt(parts[3]);
+
+            // Add the number to the new ArrayList
+            crateQuantities.add(crates);
+        }
+
+        return crateQuantities;
     }
     
     
@@ -61,8 +105,18 @@ public class Question_3_Read_Recycling_Report {
         
         // Make this method general, so it works for any set of numbers.
         // If the ArrayList contains [-9, -4, -2, -10] this function should return -2.
-        
-        return 0;   // TODO replace with your code.
+
+        // Start with the first value as the maximum
+        int max = crates.get(0);
+
+        // Compare all values to find the largest one
+        for (int quantity : crates) {
+            if (quantity > max) {
+                max = quantity;
+            }
+        }
+
+        return max;
     }
     
     
@@ -75,8 +129,21 @@ public class Question_3_Read_Recycling_Report {
         // Example: if the ArrayList contains [ 9, 3, 2, 5, 3, 0 ] and value is 3
         // The value, 3, is found at index 1 and 4.
         // So create and return a new ArrayList that contains [ 1, 4 ]
-        
-        return null;   // TODO delete and replace with your code.
+
+        // Create a new ArrayList to store matching indexes
+        List<Integer> indexes = new ArrayList<>();
+
+        // Check each element in the list
+        for (int i = 0; i < quantities.size(); i++) {
+
+            // If the current value matches, save its index
+            if (quantities.get(i) == value) {
+                indexes.add(i);
+            }
+        }
+
+        // Return the list of matching indexes
+        return indexes;
     }
     
 }
