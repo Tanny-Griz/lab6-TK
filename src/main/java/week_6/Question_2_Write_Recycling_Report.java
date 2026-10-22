@@ -1,5 +1,11 @@
 package week_6;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import static input.InputUtils.intInput;
+
 /**
 You work for a recycling company.
 You’d like to collect some statistics on how much each of the houses on a certain street is recycling.
@@ -79,7 +85,16 @@ public class Question_2_Write_Recycling_Report {
     
         // TODO ask user for input in this method.
 
-        return null;  // TODO delete and replace with your code
+        // Create an array to store the number of crates for each house
+        int[] cratesPerHouse = new int[houses];
+
+        // Ask the user for the number of crates at each house
+        for (int i = 0; i < houses; i++) {
+            cratesPerHouse[i] = intInput("Enter crates for house " + i + ": ");
+        }
+
+        // Return the array with all user input
+        return cratesPerHouse;
     }
     
     
@@ -87,8 +102,15 @@ public class Question_2_Write_Recycling_Report {
         // TODO calculate and return the total.
         //  Add up all of the numbers in the array and return the total.
         //  This method should work for any length cratesPerHouse array.
-        
-        return 0;  // TODO delete and replace with your code
+
+        int total = 0;
+
+        // Add the number of crates from each house
+        for (int crates : cratesPerHouse) {
+            total += crates;
+        }
+
+        return total;
     }
     
     
@@ -101,7 +123,17 @@ public class Question_2_Write_Recycling_Report {
         //   make sure you understand all of your code - add comments to help me know you do
         //   if you copy or adapt code from any other source, you MUST add a note with the source
 
-        return 0; // TODO delete and replace with your code
+        // Assume the first house has the maximum
+        int max = cratesPerHouse[0];
+
+        // Compare each house with the current maximum
+        for (int crates : cratesPerHouse) {
+            if (crates > max) {
+                max = crates;
+            }
+        }
+
+        return max;
     }
     
     
@@ -115,7 +147,17 @@ public class Question_2_Write_Recycling_Report {
         //   if you copy or adapt code from any other source, you MUST add a note with the source
 
 
-        return 0; // TODO delete and replace with your code
+        // Assume the first house has the minimum
+        int min = cratesPerHouse[0];
+
+        // Compare each house with the current minimum
+        for (int crates : cratesPerHouse) {
+            if (crates < min) {
+                min = crates;
+            }
+        }
+
+        return min;
     }
     
     
@@ -130,8 +172,20 @@ public class Question_2_Write_Recycling_Report {
         //
         // Example: if cratesPerHouse is { 1, 0, 3, 0, 2 } the max is 3, and the largest value
         // is in position 2 of the array. So this method should return 2.
-    
-        return 0; // TODO delete and replace with your code
+
+        // Start with the first house
+        int maxIndex = 0;
+
+        // Check the remaining houses
+        for (int i = 1; i < cratesPerHouse.length; i++) {
+
+            if (cratesPerHouse[i] > cratesPerHouse[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+
+        // Return the house number, not the number of crates
+        return maxIndex;
     }
     
     
@@ -154,5 +208,27 @@ public class Question_2_Write_Recycling_Report {
         The grader is looking for this exact format.
  
         */
+        // Automatically close the file after writing
+        try (BufferedWriter writer =
+                     new BufferedWriter(new FileWriter(filename))) {
+
+            for (int i = 0; i < cratesPerHouse.length; i++) {
+
+                int crates = cratesPerHouse[i];
+
+                // Use singular for one crate, plural otherwise
+                String unit = (crates == 1) ? "crate" : "crates";
+
+                writer.write("House " + i + " recycled " + crates + " " + unit);
+                writer.newLine();
+            }
+
+            // Write the total at the end of the report
+            writer.write("Total crates recycled: " + totalCrates);
+            writer.newLine();
+
+        } catch (IOException e) {
+            System.out.println("Error writing report: " + e.getMessage());
+        }
     }
 }
