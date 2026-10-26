@@ -1,6 +1,11 @@
 package week_6;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  **The short version**:
@@ -111,7 +116,18 @@ public class Question_7_Write_Operating_System_Info_To_File_In_Data_Directory {
         // Handle any exceptions in this method. Do not declare that this method throws any exceptions.
         
         // If possible, test your code on two types of operating systems: Windows, and Mac/Linux.
-        
+
+        // Get the operating system name from system properties
+        String osName = System.getProperty("os.name");
+
+        File file = new File("data", "os.txt");
+
+        // Open the file and close it automatically
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(osName);
+        } catch (IOException e) {
+            System.out.println("Error writing OS name: " + e.getMessage());
+        }
     }
     
 }
