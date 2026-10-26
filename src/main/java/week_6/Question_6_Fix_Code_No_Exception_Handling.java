@@ -51,8 +51,9 @@ public class Question_6_Fix_Code_No_Exception_Handling {
         languages.push("JavaScript");
         languages.push("Python");
         languages.push("C#");
-        
-        while (true) {        // TODO can you use a better loop condition?
+
+
+        while (!languages.isEmpty()) {   // TODO can you use a better loop condition?
             String oneLanguage = languages.pop();
             System.out.println(oneLanguage);
         }
@@ -80,7 +81,11 @@ public class Question_6_Fix_Code_No_Exception_Handling {
         // Return 0 if the String is null.
 
         // can you write an if statement here?
-        
+
+        if (sentence == null) {
+            return 0;
+        }
+
         String[] words = sentence.split(" ");
         return words.length;
     }
