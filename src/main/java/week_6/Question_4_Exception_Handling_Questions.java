@@ -54,13 +54,13 @@ public class Question_4_Exception_Handling_Questions {
     
     // This question will be graded manually. All the test does is check that you wrote something.
     
-    String q1_pros_of_checked_exceptions = "";   //TODO Fill this in with your answer
-    String q2_cons_of_checked_exceptions = "";   //TODO Fill this in with your answer, at least 2 reasons
-    String q3_your_opinion_on_java_having_checked_and_unchecked_exceptions = ""; // TODO fill this in with your opinion
+    String q1_pros_of_checked_exceptions = "One benefit of checked exceptions is that Java requires programmers to consider possible errors. For example when reading a file, the file might not exist. This helps us write more reliable programs and handle problems instead of letting the program crash.";   //TODO Fill this in with your answer
+    String q2_cons_of_checked_exceptions = "One disadvantage is that checked exceptions require extra code, such as try-catch blocks, which can make programs longer and harder to read. Another disadvantage is that sometimes we have to handle or declare exceptions in methods that cannot actually solve the problem";   //TODO Fill this in with your answer, at least 2 reasons
+    String q3_your_opinion_on_java_having_checked_and_unchecked_exceptions = "I think checked exceptions are very useful because they remind us to think about possible errors. They are important when working with files or databases. However, I also think they can make code more complicated. Overall, I think the benefits are worth it."; // TODO fill this in with your opinion
     
     
     // Why is it often better to anticipate and try to prevent errors, vs. letting exceptions be thrown and then catch them?
     
-    String[] q4_why_is_it_better_to_anticipate_and_prevent_errors = { "", "" };  // TODO fill this in. At least 2 reasons.
+    String[] q4_why_is_it_better_to_anticipate_and_prevent_errors = { "Preventing errors makes code more reliable and easier to maintain because we fix potential problems before they happen instead of just handling the consequences. For example, we can check if an object is null before calling its methods, verify that an array index is valid, or check if a number is greater than zero before using it as a divisor. This also makes debugging easier because we can identify and fix the actual cause of an error rather than repeatedly catching the same exception.", "Preventing errors can improve performance because creating and handling exceptions takes extra time and uses additional resources. For example, checking if a variable is null or if an array index is valid is usually faster than allowing an exception to occur and then catching it. This is especially important in loops or methods that run frequently, where repeated exceptions can slow down the program. However, if checking for an error is complicated or expensive, using exception handling may sometimes be more practical." };  // TODO fill this in. At least 2 reasons.
     
 }
