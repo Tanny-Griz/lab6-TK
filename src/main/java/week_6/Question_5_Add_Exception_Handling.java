@@ -1,6 +1,7 @@
 package week_6;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -53,10 +54,18 @@ public class Question_5_Add_Exception_Handling {
         languages.push("Python");     // push() adds a new element to the end of the list.
         languages.push("Swift");
         languages.push("C#");
-    
-        while (true) {
-            String oneLanguage = languages.pop();   // pop() removes an element from the end of the list.
-            System.out.println(oneLanguage);        // What order are the elements printed in?
+
+        // Try to remove and print each language
+        try {
+            while (true) {
+                String oneLanguage = languages.pop();
+                System.out.println(oneLanguage);
+            }
+
+        } catch (NoSuchElementException e) {
+
+            // Handle the exception when the list is empty
+            System.out.println("The LinkedList is empty.");
         }
     }
     
@@ -80,9 +89,17 @@ public class Question_5_Add_Exception_Handling {
         // TODO This code throws a NullPointerException if the String sentence is null.
         // Add a try-catch block to catch the NullPointerException, and return 0 if the String sentence is null.
         // Don't modify any of the code that's here already.
-    
-        String[] words = sentence.split(" ");
-        return words.length;
+
+        try {
+            String[] words = sentence.split(" ");
+
+            return words.length;
+
+        } catch (NullPointerException e) {
+
+            // Return 0 if sentence is null
+            return 0;
+        }
     }
     
     //End of wordCount. Don't change or move this comment.  The Autograder needs it.
